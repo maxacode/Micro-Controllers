@@ -6,7 +6,7 @@ html = """<!DOCTYPE html><html>
 .buttonRed { background-color: #D11D53; border: 2px solid #000000;; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; }
 text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}
 </style></head>
-<body><center><h1>Garage Parking Assitant - Control Panel</h1></center>
+<body><center><h1>Garage Parking Assitant - Control Panel - Subaru</h1></center>
 
 <form><center>
 <p><h2>%s<p>
@@ -15,6 +15,7 @@ text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}
 <h1> Green Light - Just Right</h1>
 <center> <button class="buttonGreen" name="justrightAdd" value="Add" type="submit">Add 5</button>
 <button class="buttonRed" name="justrightMinus" value="Minus" type="submit">Subtract 5</button>
+<input type="number" id="justrightInput" name="quantity" min="1" max="500">
 </form>
 <br><br>
 <form><center>
