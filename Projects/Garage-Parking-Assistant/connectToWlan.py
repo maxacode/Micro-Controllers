@@ -20,7 +20,7 @@ print("Starting WLAN Connection")
 ssid = 'Tell My Wi-Fi Love Her'
 password = 'GodIsGood!'
 
-def connectWLAN(ssid, password):
+def connectWLAN():
     global ipInfo
     
     led = Pin("LED", Pin.OUT)
