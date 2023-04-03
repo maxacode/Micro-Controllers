@@ -7,6 +7,7 @@ import socket
 import sys
 import websocket
 import _webrepl
+from machine import Pin
 
 listen_s = None
 client_s = None
@@ -15,6 +16,9 @@ DEBUG = 0
 
 _DEFAULT_STATIC_HOST = const("https://micropython.org/webrepl/")
 static_host = _DEFAULT_STATIC_HOST
+
+led = Pin("LED", Pin.OUT)
+led.toggle()
 
 
 def server_handshake(cl):
@@ -91,6 +95,7 @@ HTTP/1.0 200 OK\r
 
 def setup_conn(port, accept_handler):
     global listen_s
+    led.value()
     listen_s = socket.socket()
     listen_s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
@@ -104,6 +109,7 @@ def setup_conn(port, accept_handler):
     for i in (network.AP_IF, network.STA_IF):
         iface = network.WLAN(i)
         if iface.active():
+            led.toggle()
             print("WebREPL server started on http://%s:%d/" % (iface.ifconfig()[0], port))
     print("WebREPL server started on http://%s:%d/" % (iface.ifconfig()[0], port))
     return listen_s
@@ -111,6 +117,7 @@ def setup_conn(port, accept_handler):
 
 def accept_conn(listen_sock):
     global client_s
+    led.toggle()
     cl, remote_addr = listen_sock.accept()
 
     if not server_handshake(cl):
@@ -120,10 +127,13 @@ def accept_conn(listen_sock):
     prev = os.dupterm(None)
     os.dupterm(prev)
     if prev:
+        led.toggle()
         print("\nConcurrent WebREPL connection from", remote_addr, "rejected")
         cl.close()
+        led.toggle()
         return False
     print("\nWebREPL connection from:", remote_addr)
+    led.toggle()
     client_s = cl
 
     ws = websocket.websocket(cl, True)
@@ -133,18 +143,19 @@ def accept_conn(listen_sock):
     if hasattr(os, "dupterm_notify"):
         cl.setsockopt(socket.SOL_SOCKET, 20, os.dupterm_notify)
     os.dupterm(ws)
-
+    led.toggle()
     return True
 
 
 def stop():
     global listen_s, client_s
     os.dupterm(None)
+    led.toggle()
     if client_s:
         client_s.close()
     if listen_s:
         listen_s.close()
-
+    led.toggle()
 
 def start(port=8266, password=None, accept_handler=accept_conn):
     global static_host
@@ -162,7 +173,7 @@ def start(port=8266, password=None, accept_handler=accept_conn):
 
     _webrepl.password(webrepl_pass)
     s = setup_conn(port, accept_handler)
-
+    led.toggle()
     if accept_handler is None:
         print("Starting webrepl in foreground mode")
         # Run accept_conn to serve HTML until we get a websocket connection.
@@ -172,7 +183,7 @@ def start(port=8266, password=None, accept_handler=accept_conn):
         print("Started webrepl in normal mode")
     else:
         print("Started webrepl in manual override mode")
-
+    led.toggle()
 
 def start_foreground(port=8266, password=None):
     start(port, password, None)

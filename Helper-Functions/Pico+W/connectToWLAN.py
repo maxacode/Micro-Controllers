@@ -53,4 +53,4 @@ def connectWLAN():
         status = wlan.ifconfig()
         print( f'ip = {str(status)}')
         
-connectWLAN(ssid, password)
+#connectWLAN(ssid, password)
