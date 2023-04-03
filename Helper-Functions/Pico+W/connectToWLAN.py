@@ -4,6 +4,11 @@
 # connect to SSID up to 10 attempts then fails.
 #USAGE:
 # import connectToWlan - thats it. (No NAME==MAIN so code runs directly)
+# Connecting to WLAN
+#from connectToWlan import connectWLAN
+#ipInfo= connectWLAN()
+#print(ipInfo)
+ 
 
 print("Starting Up Device")
 
@@ -20,7 +25,7 @@ print("Starting WLAN Connection")
 ssid = 'Tell My Wi-Fi Love Her'
 password = 'GodIsGood!'
 
-def connectWLAN(ssid, password):
+def connectWLAN():
     led = Pin("LED", Pin.OUT)
     led.value(1)
 

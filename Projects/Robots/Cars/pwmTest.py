@@ -7,7 +7,7 @@ pwm.freq(50)
  
 pwm.duty_u16(51)
 time.sleep(1)
-for d in range(14000,75000, 1000):
+for d in range(14000,95000, 1000):
     print(d)
     pwm.duty_u16(d)
     time.sleep(0.2)

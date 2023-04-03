@@ -65,21 +65,15 @@ class lilJ():
     
     def set_speed(self, speed):
         self.default_speed = speed
-        self.motor_A_forward.duty_u16(self.default_speed)
-        self.motor_A_reverse.duty_u16(self.default_speed)
-        self.motor_B_forward.duty_u16(self.default_speed)
-        self.motor_B_reverse.duty_u16(self.default_speed)
+        #self.motor_A_forward.duty_u16(self.default_speed)
+        #self.motor_A_reverse.duty_u16(self.default_speed)
+       # self.motor_B_forward.duty_u16(self.default_speed)
+       # self.motor_B_reverse.duty_u16(self.default_speed)
 
     def testSpeed(self, speed=None):
         if speed is not None:
             self.set_speed(speed)
-        print(f"Testing speed 0")
-        self.motor_A_forward.duty_u16(0)
-        self.motor_A_reverse.duty_u16(0)
-        self.motor_B_forward.duty_u16(0)
-        self.motor_B_reverse.duty_u16(0)
-        sleep(1)
-            
+ 
         for i in range(350, 1023, 10):
             print(f"Testing speed {i}")
             self.motor_A_forward.duty_u16(i)
@@ -88,10 +82,25 @@ class lilJ():
             self.motor_B_reverse.duty_u16(i)
             sleep(.1)
         
-        self.setAllMotorsLow()
+        #self.setAllMotorsLow()
  
-
-
+     def testMotors(self, speed=None):
+        if speed is not None:
+            self.set_speed(speed)
+ 
+        self.forward()
+        sleep(.2)
+        
+        self.reverse()
+        sleep(.2)
+        
+        self.turnLeft()
+        sleep(.2)
+        
+        self.turnRight()
+        sleep(.2)
+        #self.setAllMotorsLow()
+    
     def setAllMotorsLow(self):
         self.motor_A_forward.duty_u16(0)
         self.motor_A_reverse.duty_u16(0)
@@ -107,9 +116,8 @@ class lilJ():
         self.motor_A_reverse.duty_u16(self.default_speed)
         self.motor_B_forward.duty_u16(self.default_speed)
         self.motor_B_reverse.duty_u16(0)
-        sleep(2)
-        print(speed)
-        self.setAllMotorsLow()
+       # sleep(2)
+        # self.setAllMotorsLow()
 
     def reverse(self, speed=None):
         if speed is not None:
@@ -118,8 +126,8 @@ class lilJ():
         self.motor_A_reverse.duty_u16(0)
         self.motor_B_forward.duty_u16(0)
         self.motor_B_reverse.duty_u16(self.default_speed)
-        sleep(0.5)
-        self.setAllMotorsLow()
+       # sleep(0.5)
+       # self.setAllMotorsLow()
 
     def turnLeft(self, speed=None):
         if speed is not None:
@@ -128,8 +136,8 @@ class lilJ():
         self.motor_A_reverse.duty_u16(0)
         self.motor_B_forward.duty_u16(self.default_speed)
         self.motor_B_reverse.duty_u16(0)
-        sleep(0.5)
-        self.setAllMotorsLow()
+      #  sleep(0.5)
+     #   self.setAllMotorsLow()
         
     def turnRight(self, speed=None):
         if speed is not None:
@@ -138,17 +146,7 @@ class lilJ():
         self.motor_A_reverse.duty_u16(self.default_speed)
         self.motor_B_forward.duty_u16(0)
         self.motor_B_reverse.duty_u16(self.default_speed)
-        sleep(0.5)
-        self.setAllMotorsLow()
+     #   sleep(0.5)
+      #  self.setAllMotorsLow()
         
     
-    # @property
-    # def distance(self):
-    #     # Get disance in cm
-    #     distance = (self.range_finder.ping()/10) - 5
-    #     return distance
-    
-
-
-
- 
