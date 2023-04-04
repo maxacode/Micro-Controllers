@@ -11,3 +11,7 @@ print(ipInfo)
 import webrepl
 webrepl.start()
 
+#Main code here
+# Ifa  do a try here and code fails will webrepl stay online? 
+#  
+
