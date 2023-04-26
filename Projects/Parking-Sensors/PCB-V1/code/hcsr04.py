@@ -1,15 +1,18 @@
-import machine, time
-from machine import Pin
+from machine import Pin, time_pulse_us
+from utime import sleep_us
 
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 __author__ = 'Roberto Sánchez'
 __license__ = "Apache License 2.0. https://www.apache.org/licenses/LICENSE-2.0"
+
 
 class HCSR04:
     """
     Driver to use the untrasonic sensor HC-SR04.
     The sensor range is between 2cm and 4m.
+
     The timeouts received listening to echo pin are converted to OSError('Out of range')
+
     """
     # echo_timeout_us is based in chip range limit (400cm)
     def __init__(self, trigger_pin, echo_pin, echo_timeout_us=500*2*30):
@@ -33,13 +36,18 @@ class HCSR04:
         We use the method `machine.time_pulse_us()` to get the microseconds until the echo is received.
         """
         self.trigger.value(0) # Stabilize the sensor
-        time.sleep_us(5)
+        sleep_us(5)
         self.trigger.value(1)
         # Send a 10us pulse.
-        time.sleep_us(10)
+        sleep_us(10)
         self.trigger.value(0)
         try:
-            pulse_time = machine.time_pulse_us(self.echo, 1, self.echo_timeout_us)
+            pulse_time = time_pulse_us(self.echo, 1, self.echo_timeout_us)
+            # time_pulse_us returns -2 if there was timeout waiting for condition; and -1 if there was timeout during the main measurement. It DOES NOT raise an exception
+            # ...as of MicroPython 1.17: http://docs.micropython.org/en/v1.17/library/machine.html#machine.time_pulse_us
+            if pulse_time < 0:
+                MAX_RANGE_IN_CM = 500 # it's really ~400 but I've read people say they see it working up to ~460
+                pulse_time = int(MAX_RANGE_IN_CM * 29.1) # 1cm each 29.1us
             return pulse_time
         except OSError as ex:
             if ex.args[0] == 110: # 110 = ETIMEDOUT

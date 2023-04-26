@@ -63,4 +63,3 @@ def connectWLAN():
         return(ipInfo)
     
 #connectWLAN(ssid, password)
-
