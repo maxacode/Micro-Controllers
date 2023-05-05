@@ -32,11 +32,35 @@ Refs:
 
 
 ## Version 3 - PCB 2.0
+ Synopsis: A PCB with DIP for PIC10F200 - 2 GPIO's for Ultrasonic Trigger, Echo, 2 more for Red/Green LED, 1 Button to set distance. 
+ Red when to STOP, green if coming close(Close enough), flashing red if too close. 
+
+ - Careful when programming, remove Vpp line to USS 
 - PCB
 - Ultrasonic physical female headers on PCB
+    - 3.3v to 5v Operations? Check this
+- 1 Button 
 - Display - physical female headers on PCB
 - RGB Led - physical female headers on PCB
-- PICO with those special connections
-- Power from JST battery
+- PIC10F200 - 6pin SOT-23 or 8 DIP
+    1 NC    8 GP3/MCLR/VPP
+    2 Cdd   7 Vss
+    3 GP2   6 NC
+    4 GP1   5 GPO/ICSPDAT
+
+    - Operating Current - 175 uA @ 2v 4MHz
+    - Standby Current 100 nA @2v
+    - OPerating Voltage 2.0 to 5.5 V
+     
+- Power from JST battery (2AA)
 - Battery charging circuit on board (Built into PCB or mountable? with those pre made modules)
 
+ToDo:
+1. Check voltage of Ultrasonic sensor to determine battery imput 
+2. Test 
+3. Check out differnt pics: pic12f629p, pic12f675, pic10f200
+
+
+
+Pads
+https://forums.autodesk.com/t5/fusion-360-electronics/adding-a-solder-pad-in-a-schematic/td-p/9840202
