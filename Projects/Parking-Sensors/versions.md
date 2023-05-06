@@ -62,7 +62,7 @@ ToDo:
 4. Save car distance on button press: https://electronics.stackexchange.com/questions/250652/how-to-save-variables-inside-microcontrollers-memory
 
 5. How to set distance:
-    1. button on boot/anytime(interupt)
+     1. button on boot/anytime(interupt)
     2. Distance of car (ex: 50cm) then hand in front of sensors goes to (distance < 5cm for 5 seconds will set distance)
 
 6. Test outside. 
