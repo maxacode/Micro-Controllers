@@ -59,6 +59,30 @@ ToDo:
 1. Check voltage of Ultrasonic sensor to determine battery imput 
 2. Test 
 3. Check out differnt pics: pic12f629p, pic12f675, pic10f200
+4. Save car distance on button press: https://electronics.stackexchange.com/questions/250652/how-to-save-variables-inside-microcontrollers-memory
+
+5. How to set distance:
+    1. button on boot/anytime(interupt)
+    2. Distance of car (ex: 50cm) then hand in front of sensors goes to (distance < 5cm for 5 seconds will set distance)
+
+6. Test outside. 
+    1. RPI Pico Wifi connected to debug and send stats via MQTT? 
+
+7.Paperwork with product:
+        - Certifications needed?
+        - Instructions 
+            - Turn on device
+            - Place car in perfect location
+            - Stand to the side and hold the button for 3 seconds (Until Green Lights flash)
+            - Test sensor by moving the car in/out 
+            - Can be changed anytime 'git
+        - Warning
+            - device is not perfect
+            - 10cm to 1400cm range ( get real numbers)
+            - 
+
+
+https://www.ebay.com/itm/324139980479?epid=1804659339&hash=item4b783f96bf:g:-kQAAOSwW35em5Xh
 
 
 
